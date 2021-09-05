@@ -1,5 +1,6 @@
 import { onNavigate } from "../../router/router.js"
 import { Navbar } from "../Navbar.js"
+import { savePosts, getPosts } from "../../lib/firebase.js"
 
 export const Post = () => {
     const viewInfo = `
@@ -23,10 +24,36 @@ export const Post = () => {
     contentPost.classList.add('containerpost');
     contentPost.innerHTML = viewInfo;
     post.appendChild(contentPost);
+    const publication = contentPost.querySelector('#publicationsForm');
+
+    
     const btnAddPost = contentPost.querySelector('#btnAddPoster');
-    btnAddPost.addEventListener('click', (e) => {
+
+    btnAddPost.addEventListener('click', async (e) => {
         e.preventDefault();
-        onNavigate('/home');
-    });
+        const title =publication['Title'].value
+        const rating = publication['rating'].value
+        const review = publication['Review'].value
+      try{
+        await savePosts(title, rating, review); 
+        const querySnapshot = await getPosts();
+        querySnapshot.forEach(doc => { 
+            console.log(doc.data())
+        })
+         
+        //console.log(title, rating, review)
+        } 
+        catch (error){
+            //  console.log('error')
+          }
+    
+            onNavigate('/home');
+        });
+       
     return post;
-}
+};  
+//publication.addEventListener('click', async (e) => {
+
+//})
+
+    
