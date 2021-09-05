@@ -56,3 +56,16 @@ const provider = new firebase.auth.GoogleAuthProvider();
 export const loginGoogle = () => auth
     .signInWithPopup(provider);
 
+
+//Función para guardar POSTS
+
+export const savePosts = (title, rating, review) =>
+fireSt.collection('posts') .doc().set({
+    title,
+    rating,
+    review
+});
+
+//Función para mandar a llamar el contenido de savePosts
+
+export const getPosts = () => fireSt.collection('posts').get();
