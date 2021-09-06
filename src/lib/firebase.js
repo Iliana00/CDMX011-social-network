@@ -49,13 +49,11 @@ export const activeSession = () => {
     })
 }
 
-
 //Metodo para loguearse con Google
 
 const provider = new firebase.auth.GoogleAuthProvider();
 export const loginGoogle = () => auth
     .signInWithPopup(provider);
-
 
 //Función para guardar POSTS
 
@@ -68,4 +66,8 @@ fireSt.collection('posts') .doc().set({
 
 //Función para mandar a llamar el contenido de savePosts
 
-export const getPosts = () => fireSt.collection('posts').get();
+export const getPosts = (callback) => fireSt.collection('posts').get();
+
+//Función para llamar el contenido de los objetos ¿?
+
+export const onGetPosts = (callback) => fireSt.collection('posts').onSnapshot(callback);

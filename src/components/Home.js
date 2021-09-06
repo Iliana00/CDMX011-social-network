@@ -14,7 +14,7 @@ export const Home = () => {
 
     home.appendChild(Publication())
 
-    //home.appendChild(RendPosts())
+    home.appendChild(RendPosts())
 
 
 

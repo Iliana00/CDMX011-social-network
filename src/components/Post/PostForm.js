@@ -1,6 +1,6 @@
 import { onNavigate } from "../../router/router.js"
 import { Navbar } from "../Navbar.js"
-import { savePosts, getPosts } from "../../lib/firebase.js"
+import { getPosts, savePosts } from "../../lib/firebase.js"
 
 export const Post = () => {
     const viewInfo = `
@@ -31,29 +31,29 @@ export const Post = () => {
 
     btnAddPost.addEventListener('click', async (e) => {
         e.preventDefault();
-        const title =publication['Title'].value
-        const rating = publication['rating'].value
-        const review = publication['Review'].value
+        let title = publication['Title'].value
+        let rating = publication['rating'].value
+        let review = publication['Review'].value
       try{
-        await savePosts(title, rating, review); 
-        const querySnapshot = await getPosts();
-        querySnapshot.forEach(doc => { 
-            console.log(doc.data())
-        })
-         
+        await savePosts(title, rating, review);       
         //console.log(title, rating, review)
         } 
         catch (error){
-            //  console.log('error')
-          }
-    
+             console.log('hay un error')
+          }    
             onNavigate('/home');
         });
+    
+      /* publication.addEventListener('click', async (e) => {
+            e.preventDefault();
+                const querySnapshot = await getPosts();
+                querySnapshot.forEach(doc => {
+                //console.log(doc.data)  
+            });                                           
+            onNavigate('/home');
+        });    */
        
     return post;
 };  
-//publication.addEventListener('click', async (e) => {
-
-//})
 
     
