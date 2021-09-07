@@ -1,6 +1,8 @@
 import { onNavigate } from "../../router/router.js"
 import { Navbar } from "../Navbar.js"
-import { getPosts, savePosts } from "../../lib/firebase.js"
+import { getUser, savePosts, updatedPost } from "../../lib/firebase.js"
+import { idPost, postStatus, editStatus } from "../Post/RendPosts.js"
+
 
 export const Post = () => {
     const viewInfo = `
@@ -28,30 +30,61 @@ export const Post = () => {
 
     
     const btnAddPost = contentPost.querySelector('#btnAddPoster');
+    const user = getUser();
+    const date = new Date();
+    const dateToday = date.toDateString();
 
-    btnAddPost.addEventListener('click', async (e) => {
+   /* btnAddPost.addEventListener('click', async (e) => {
         e.preventDefault();
-        let title = publication['Title'].value
-        let rating = publication['rating'].value
-        let review = publication['Review'].value
+        const title = publication['Title'].value
+        const rating = publication['rating'].value
+        const review = publication['Review'].value
+
       try{
-        await savePosts(title, rating, review);       
+        await savePosts(title, rating, review, user.email, dateToday);       
         //console.log(title, rating, review)
         } 
         catch (error){
              console.log('hay un error')
           }    
             onNavigate('/home');
-        });
-    
-      /* publication.addEventListener('click', async (e) => {
-            e.preventDefault();
-                const querySnapshot = await getPosts();
-                querySnapshot.forEach(doc => {
-                //console.log(doc.data)  
-            });                                           
-            onNavigate('/home');
-        });    */
+        });*/
+        const title = publication['Title']
+        const rating = publication['rating']
+        const review = publication['Review']
+        
+
+        if(!postStatus){
+           publication.addEventListener('submit', async (e) =>{
+               e.preventDefault();
+               try{                
+                await savePosts(title.value, rating.value, review.value, user.email, dateToday); 
+               } catch (error) {
+                console.log('hay erroooooooor')
+               }
+                    
+            onNavigate('/home')
+           })
+        } else {
+            //console.log(editStatus)
+                title.value = editStatus.title
+                rating.value = editStatus.rating
+                review.value = editStatus.review
+                btnAddPost.textContent = "Update";   
+            publication.addEventListener('submit', async (e) =>{
+                e.preventDefault();                            
+               await updatedPost(idPost, {
+                title: title.value,
+                rating: rating.value,
+                review: review.value
+               })
+                                    
+             onNavigate('/home')
+            })
+        }
+       
+
+
        
     return post;
 };  

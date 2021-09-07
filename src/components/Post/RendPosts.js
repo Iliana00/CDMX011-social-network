@@ -1,27 +1,28 @@
-import { onGetPosts, getUser } from "../../lib/firebase.js";
+import { onGetPosts, deletePosts, getPost, savePosts } from "../../lib/firebase.js";
+import { onNavigate } from "../../router/router.js";
+
+export let idPost 
+export let postStatus = false;
+export let editStatus 
 
 export const RendPosts = () => {
-  
+    idPost = "";
+    editStatus = "";
+    postStatus = false;
     const posts = document.createElement('div')
     posts.classList.add("container-posts")
-
-    //const content = document.createElement('div')
-    //content.classList.add("profile-content")
-    //content.innerHTML = viewContent
     
     onGetPosts((querySnapshot) => {
         posts.innerHTML = "";
 
         querySnapshot.forEach(doc => {
             const post = doc.data();
-            const user = getUser();
-            const date = new Date();
-            const dateToday = date.toDateString();
+            post.id = doc.id;
             posts.innerHTML += 
             `<div class="profile-content">
             <div class="user-data">
-            <p class="getemail"> ${user ? user.email : ''}</p>
-            <p class="getemail">${dateToday}</p>
+            <p class="getemail"> ${post.user}</p>
+            <p class="getemail">${post.date}</p>
         </div>
      <div class="container-review">
             <div class="title-rating">
@@ -29,84 +30,48 @@ export const RendPosts = () => {
                 <p>Rating: ${post.rating}/10</p>
             </div>
             <div class="review-text">
-                <p>${post.review}w</p>
+            <p>${post.review}</p>
             </div>
         </div>
         <div class="texticonspost">
             <i class="icon-like" src="../img/heart-solid.svg"></i>
             <div class="delete-edit">
-                <img class="icon-post" src="../img/icons8-borrar-para-siempre-50.png">
-                <img class="icon-post" src="../img/icons8-editar-50.png">
+               <a><img class="iconPost btnDelete" data-id="${post.id}"  src="../img/icons8-borrar-para-siempre-50.png"></a> 
+                <a><img class="iconPost btnEdit" data-id="${post.id}" src="../img/icons8-editar-50.png"></a>
             </div>
         </div> 
             </div>
             <br>
-            <br>
-            
+            <br>                        
     `
-            
+    const btnDelete = document.querySelectorAll('.btnDelete');
+    btnDelete.forEach(iconPost => {
+        iconPost.addEventListener('click', async(e) =>{
+            await deletePosts(e.target.dataset.id)
         })
-
     });
 
-    //posts.appendChild(content);
-
+   //const savePost = savePosts()
+    //const publication = savePost.querySelector('#publicationsForm')
+    const btnEdit = document.querySelectorAll('.btnEdit');
+    btnEdit.forEach(btn => {
+        btn.addEventListener('click', async (e) => {
+            const doc = await getPost(e.target.dataset.id);
+            editStatus = doc.data();
+            postStatus = true;
+            idPost = doc.id;
+        onNavigate('/post')
+        
+        })
+        
+    });
+        
+    });
+    })
     return posts
 }
+ 
 
 
 
 
-
-
-
-
- /*const contPostForm = Post();
-    const publicationsForm = contPostForm.querySelector('#publicationsForm');
-    const containerReview = posts.querySelector('.container-review')
-
-    publicationsForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const querySnapshot = await getPosts();
-        //console.log(querySnapshot)
-        querySnapshot.forEach(doc => { 
-            console.log(doc.data())
-            //content.innerHTML += `<p>${doc.data().title}</p> `
-        })
-        onNavigate('/home');
-    })*/
-
-
-
-     /* const user = getUser();
-    const date = new Date();
-    const dateToday = date.toDateString();
-    const viewContent =
-    `<div class="user-data">
-            <p class="getemail"> ${user ? user.email : ''}</p>
-            <p class="getemail">${dateToday}</p>
-        </div>
-       <!-- <div class="container-review">
-            <div class="title-rating">
-                <p>Title: Harry Potter</p>
-                <p>Rating: 10/10</p>
-            </div>
-            <div class="review-text">
-                <p>Este es el review</p>
-            </div>
-        </div>
-        <div class="texticonspost">
-            <i class="icon-like" src="../img/heart-solid.svg"></i>
-            <div class="delete-edit">
-                <img class="icon-post" src="../img/icons8-borrar-para-siempre-50.png">
-                <img class="icon-post" src="../img/icons8-editar-50.png">
-            </div>
-        </div> -->
-    `
-*/
-
-/* `
-            <p>${post.title}</p>
-            <br>
-            <p>${post.review}</p>  
-            ` */
