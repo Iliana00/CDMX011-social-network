@@ -47,7 +47,12 @@ export const RendPosts = () => {
     const btnDelete = document.querySelectorAll('.btnDelete');
     btnDelete.forEach(iconPost => {
         iconPost.addEventListener('click', async(e) =>{
-            await deletePosts(e.target.dataset.id)
+           try { 
+            swal('Are you sure to delete this post');   
+            await deletePosts(e.target.dataset.id)               
+           } catch(error){
+            console.log
+           }
         })
     });
 

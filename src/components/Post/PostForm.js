@@ -66,7 +66,6 @@ export const Post = () => {
             onNavigate('/home')
            })
         } else {
-            //console.log(editStatus)
                 title.value = editStatus.title
                 rating.value = editStatus.rating
                 review.value = editStatus.review
