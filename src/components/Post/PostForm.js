@@ -69,7 +69,7 @@ export const Post = () => {
                 title.value = editStatus.title
                 rating.value = editStatus.rating
                 review.value = editStatus.review
-                btnAddPost.textContent = "Update";   
+                btnAddPost.textContent = 'Update';   
             publication.addEventListener('submit', async (e) =>{
                 e.preventDefault();                            
                await updatedPost(idPost, {

@@ -57,13 +57,12 @@ export const loginGoogle = () => auth
 
 //Función para guardar POSTS
 
-export const savePosts = (title, rating, review, user, date) =>
-fireSt.collection('posts') .doc().set({
-    title,
-    rating,
-    review,
-    user,
-    date
+export const savePosts = (title, rating, review, user, date) => fireSt.collection('posts').doc().set({
+  title,
+  rating,
+  review,
+  user,
+  date,
 });
 
 //Función para mandar a llamar el contenido de savePosts
@@ -83,3 +82,5 @@ export const getPost = (id) => fireSt.collection('posts').doc(id).get();
 
 //Función para actualizar el post
 export const updatedPost = (id, updatedTask) => fireSt.collection('posts').doc(id).update(updatedTask);
+
+
