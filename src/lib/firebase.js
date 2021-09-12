@@ -40,8 +40,6 @@ export const activeSession = () => {
         if (user) {
             if (window.location.origin) {
                 onNavigate('/home');
-            } else {
-                window.location
             }
         } else {
             onNavigate('/');
@@ -63,6 +61,9 @@ export const savePosts = (title, rating, review, user, date) => fireSt.collectio
   review,
   user,
   date,
+  timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+  likesCounter: 0,
+  likes: []
 });
 
 //Función para mandar a llamar el contenido de savePosts
@@ -82,5 +83,25 @@ export const getPost = (id) => fireSt.collection('posts').doc(id).get();
 
 //Función para actualizar el post
 export const updatedPost = (id, updatedTask) => fireSt.collection('posts').doc(id).update(updatedTask);
+
+//Función para dar like
+export const likePost =  (postId) => {
+    const uid = firebase.auth().currentUser.uid;
+    return fireSt.collection('posts').doc(postId).update({
+        likes: firebase.firestore.FieldValue.arrayUnion(uid),
+    });
+}
+
+//Función para quitar el like
+export const unlikePost = (postId) => {
+    const uid = firebase.auth().currentUser.uid;
+    return fireSt.collection('posts').doc(postId).update({
+        likes: firebase.firestore.FieldValue.arrayRemove(uid),
+    });
+}
+
+//Función para obtener los likes
+export const onGetLikes = (callback) => 
+    fireSt.collection('likes').onSnapshot(callback)
 
 

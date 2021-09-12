@@ -417,14 +417,13 @@ h3 {
 }
 
 .icon-like {
-    color: tomato;
-    width: 8px;
-    height: 8px;
+    width: 25px;
+    height: 25px;
 }
 
 .icon-post {
-    width: 15px;
-    height: 15px;
+    width: 20px;
+    height: 20px;
 }
 
 /* ==========================================Footer================================================= */
