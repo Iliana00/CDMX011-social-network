@@ -1,4 +1,4 @@
 global.firebase = {
-    initializeApp: () => {},
-    auth: () => {},
+  initializeApp: () => {},
+  auth: () => {},
 };

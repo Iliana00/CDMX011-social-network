@@ -1,9 +1,10 @@
-import { getUser } from "../lib/firebase.js";
-import { onNavigate } from "../router/router.js";
+/* eslint-disable import/no-cycle */
+import { getUser } from '../lib/firebase.js';
+import { onNavigate } from '../router/router.js';
 
 export const Publication = () => {
-    const user = getUser();
-    const view = `
+  const user = getUser();
+  const view = `
     <div class="addPublication">
         <p class= "getemail">${user ? user.email : ''}</p>
     <div class= "container-addpost">   
@@ -16,18 +17,20 @@ export const Publication = () => {
     </div> 
     </div>`;
 
-    const publicationsDiv = document.createElement('div')
-    publicationsDiv.classList.add('Poster')
-    publicationsDiv.innerHTML = view
+  const publicationsDiv = document.createElement('div');
+  publicationsDiv.classList.add('Poster');
+  publicationsDiv.innerHTML = view;
 
-    const btnAddPost = publicationsDiv.querySelector('#addpublications');
-    btnAddPost.addEventListener('click', event => {
-        event.preventDefault();
-        onNavigate('/post');
-    });
+  const btnAddPost = publicationsDiv.querySelector('#addpublications');
+  btnAddPost.addEventListener('click', (event) => {
+    event.preventDefault();
+    onNavigate('/post');
+  });
 
-    //en el botón de enviar poner la lógica para mandar el post a firebase y también para que aparezca ya sea en home o perfil, intentar usar un parámetro para indicar si está en home o perfil para usar la misma lógica del componente
+  /* en el botón de enviar poner la lógica para mandar */
+  /* el post a firebase y también para que aparezca ya sea */
+  /* en home o perfil, intentar usar un parámetro para indicar */
+  /* si está en home o perfil para usar la misma lógica del componente */
 
-    return publicationsDiv
-
+  return publicationsDiv;
 };

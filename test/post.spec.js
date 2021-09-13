@@ -1,12 +1,7 @@
-/*import { savePosts } from "../src/lib/firebase"
-
+import { savePosts } from '../src/lib/firebase';
 
 describe('savePosts', () => {
-  it('Debería poder agregar posts', () =>{
-    return savePosts('Libro interesante'). async((data) =>{
-        expect(data).toBe('Libro interesante')
-    }
-     )
-  })
-})
-*/
+  it('Debería poder agregar posts', () => savePosts('Libro interesante').async((data) => {
+    expect(data).toBe('Libro interesante');
+  }));
+});

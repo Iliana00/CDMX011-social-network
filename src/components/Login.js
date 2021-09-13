@@ -1,7 +1,9 @@
-import { login, loginGoogle } from "../lib/firebase.js";
-import { onNavigate } from "../router/router.js";
+/* eslint-disable import/no-cycle */
+import { login, loginGoogle } from '../lib/firebase.js';
+import { onNavigate } from '../router/router.js';
+
 export const Login = () => {
-    const view = `
+  const view = `
 <div class="acount-header">
     <img src="../img/logoFormLoveBook.png" class="acount-logo" alt="LoveBook logo">
 </div>
@@ -28,39 +30,39 @@ export const Login = () => {
         <button type="submit" id="signup">Sign Up</button>
     </form>
 </div>`;
-    const loginContainer = document.createElement('div');
-    loginContainer.classList.add('acount');
-    loginContainer.innerHTML = view;
-    const btnLogin = loginContainer.querySelector('#btnLogin');
-    const btnSignUp = loginContainer.querySelector('#signup');
-    const withGoogle = loginContainer.querySelector('#withGoogle');
-    btnLogin.addEventListener('click', async(event) => {
-        event.preventDefault();
-        const email = loginContainer.querySelector('#loginEmail').value;
-        const password = loginContainer.querySelector('#loginPassword').value;
-        console.log(email, password);
-        try {
-            await login(email, password);
-            //onNavigate('/home');
-        } catch (error) {
-            loginContainer.querySelector('#loginMessages').innerHTML = '&#x02716'.concat(' ', error.message);
-        }
-    });
-    btnSignUp.addEventListener('click', event => {
-        event.preventDefault();
-        onNavigate('/signUp');
-    });
-    //Login con google
-    withGoogle.addEventListener('click', async(event) => {
-        event.preventDefault();
-        try {
-            await loginGoogle()
-            console.log('logueado con google');
-            onNavigate('/home')
-        } catch (error) {
-            loginContainer.querySelector('#loginMessages').innerHTML = '&#x02716'.concat(' ', error.message);
-        }
-    });
+  const loginContainer = document.createElement('div');
+  loginContainer.classList.add('acount');
+  loginContainer.innerHTML = view;
+  const btnLogin = loginContainer.querySelector('#btnLogin');
+  const btnSignUp = loginContainer.querySelector('#signup');
+  const withGoogle = loginContainer.querySelector('#withGoogle');
+  btnLogin.addEventListener('click', async (event) => {
+    event.preventDefault();
+    const email = loginContainer.querySelector('#loginEmail').value;
+    const password = loginContainer.querySelector('#loginPassword').value;
+    // console.log(email, password);
+    try {
+      await login(email, password);
+      // onNavigate('/home');
+    } catch (error) {
+      loginContainer.querySelector('#loginMessages').innerHTML = '&#x02716'.concat(' ', error.message);
+    }
+  });
+  btnSignUp.addEventListener('click', (event) => {
+    event.preventDefault();
+    onNavigate('/signUp');
+  });
+  // Login con google
+  withGoogle.addEventListener('click', async (event) => {
+    event.preventDefault();
+    try {
+      await loginGoogle();
+      // console.log('logueado con google');
+      onNavigate('/home');
+    } catch (error) {
+      loginContainer.querySelector('#loginMessages').innerHTML = '&#x02716'.concat(' ', error.message);
+    }
+  });
 
-    return loginContainer;
+  return loginContainer;
 };
