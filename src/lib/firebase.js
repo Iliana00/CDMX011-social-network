@@ -1,4 +1,7 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-shadow */
 /* eslint-disable import/no-cycle */
+import { idPost } from '../components/Post/RendPosts.js';
 import { onNavigate } from '../router/router.js';
 
 const firebaseConfig = {
@@ -81,24 +84,24 @@ export const getPost = (id) => fireSt.collection('posts').doc(id).get();
 export const updatedPost = (id, updatedTask) => fireSt.collection('posts').doc(id).update(updatedTask);
 
 // Función para dar like
-export const likePost = (postId) => {
-  const uid = firebase.auth().currentUser.uid;
+export const likePost = (idPost) => {
+  const email = firebase.auth().currentUser.email;
   return fireSt
     .collection('posts')
-    .doc(postId)
+    .doc(idPost)
     .update({
-      likes: firebase.firestore.FieldValue.arrayUnion(uid),
+      likes: firebase.firestore.FieldValue.arrayUnion(email),
     });
 };
 
 // Función para quitar el like
-export const unlikePost = (postId) => {
-  const uid = firebase.auth().currentUser.uid;
+export const unlikePost = (idPost) => {
+  const email = firebase.auth().currentUser.email;
   return fireSt
     .collection('posts')
-    .doc(postId)
+    .doc(idPost)
     .update({
-      likes: firebase.firestore.FieldValue.arrayRemove(uid),
+      likes: firebase.firestore.FieldValue.arrayRemove(email),
     });
 };
 

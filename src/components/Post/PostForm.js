@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable import/no-cycle */
 import { onNavigate } from '../../router/router.js';
 import { Navbar } from '../Navbar.js';
@@ -64,7 +65,7 @@ export const Post = () => {
           dateToday,
         );
       } catch (error) {
-        // console.log('hay erroooooooor');
+        console.log('hay erroooooooor');
       }
 
       onNavigate('/home');
@@ -85,6 +86,6 @@ export const Post = () => {
       onNavigate('/home');
     });
   }
-
+  // console.log(idPost)
   return post;
 };
