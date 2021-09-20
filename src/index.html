@@ -1,12 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="img/favicon2.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap" rel="stylesheet">
+    <title>Love Book</title>
 </head>
+
 <body>
-  <script type="module" src="main.js"></script>
+    <main>
+        <div id="root" class="container-1"></div>
+    </main>
+    <footer>
+        <p>2021 All rights reserved - Made by Iliana, Rosa & Ana K.</p>
+    </footer>
+    <!-- SCRIPT FIREBASE-->
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-app.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-auth.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-firestore.js"></script>
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+      https://firebase.google.com/docs/web/setup#available-libraries -->
+        <script>
+            const firebaseConfig = {
+  apiKey: 'AIzaSyCr9r5Gh3K7FUuYboZgmcX8NOcQcUr-frM',
+  authDomain: 'social-network-57ba3.firebaseapp.com',
+  projectId: 'social-network-57ba3',
+  storageBucket: 'social-network-57ba3.appspot.com',
+  messagingSenderId: '22805731102',
+  appId: '1:22805731102:web:e9efc5d4c0937476979b0f',
+};
+
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+// Colocando el metodo de firebase en una constante.
+const auth = firebase.auth();
+// Initialize Firestore
+const fireSt = firebase.firestore();
+
+
+        </script>
+
+    <script type="module" src="main.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 </body>
+
 </html>
