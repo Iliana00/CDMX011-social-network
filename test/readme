@@ -8,7 +8,7 @@
 // import MockFirebase from '../_mocks_/firebase-mock.js';
 // global.firebase = MockFirebase();
 
-import MockFirebase from 'mock-cloud-firestore';
+/* import MockFirebase from 'mock-cloud-firestore';
 
 const fixtureData = {
   __collection__: {
@@ -32,4 +32,4 @@ describe('savePosts', () => {
   it('Debería poder agregar posts', () => savePosts('Libro interesante').async((data) => {
     expect(data).toBe('Libro interesante');
   }));
-});
+}); */

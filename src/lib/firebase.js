@@ -4,39 +4,30 @@
 import { idPost } from '../components/Post/RendPosts.js';
 import { onNavigate } from '../router/router.js';
 
-const firebaseConfig = {
-  apiKey: 'AIzaSyCr9r5Gh3K7FUuYboZgmcX8NOcQcUr-frM',
-  authDomain: 'social-network-57ba3.firebaseapp.com',
-  projectId: 'social-network-57ba3',
-  storageBucket: 'social-network-57ba3.appspot.com',
-  messagingSenderId: '22805731102',
-  appId: '1:22805731102:web:e9efc5d4c0937476979b0f',
-};
-
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
 // Colocando el metodo de firebase en una constante.
-const auth = firebase.auth();
+// const auth = firebase.auth();
 // Initialize Firestore
-const fireSt = firebase.firestore();
+// const fireSt = firebase.firestore();
 
 // Metodo que me permite autenticar al  usuario con usuario y contraseña
-export const register = (email, password) => auth.createUserWithEmailAndPassword(email, password);
+export const register = (email, password) => firebase.auth()
+  .createUserWithEmailAndPassword(email, password);
 
 // Metodo que me permite acceder a mi cuenta con usuario y contraseña
-export const login = (email, password) => auth.signInWithEmailAndPassword(email, password);
+export const login = (email, password) => firebase.auth()
+  .signInWithEmailAndPassword(email, password);
 
 // Metodo para obtener al usuario que accedio
 
-export const getUser = () => auth.currentUser;
+export const getUser = () => firebase.auth().currentUser;
 
 // Metodo para hacer que un usuario salga de la sesión
-export const signOut = () => auth.signOut();
+export const signOut = () => firebase.auth().signOut();
 
 // Metodo que indica si el usuario tiene la sesión activa
 
 export const activeSession = () => {
-  auth.onAuthStateChanged((user) => {
+  firebase.auth().onAuthStateChanged((user) => {
     if (user) {
       if (window.location.origin) {
         onNavigate('/home');
@@ -49,12 +40,14 @@ export const activeSession = () => {
 
 // Metodo para loguearse con Google
 
-const provider = new firebase.auth.GoogleAuthProvider();
-export const loginGoogle = () => auth.signInWithPopup(provider);
+export const loginGoogle = () => {
+  const provider = new firebase.auth.GoogleAuthProvider();
+  return firebase.auth().signInWithPopup(provider);
+};
 
 // Función para guardar POSTS
 
-export const savePosts = (title, rating, review, user, date) => fireSt.collection('posts').doc().set({
+export const savePosts = (title, rating, review, user, date) => firebase.firestore().collection('posts').doc().set({
   title,
   rating,
   review,
@@ -71,22 +64,22 @@ export const savePosts = (title, rating, review, user, date) => fireSt.collectio
 
 // Función para llamar el contenido de los objetos ¿?
 
-export const onGetPosts = (callback) => fireSt.collection('posts').onSnapshot(callback);
+export const onGetPosts = (callback) => firebase.firestore().collection('posts').onSnapshot(callback);
 
 // Función para borrar posts
 
-export const deletePosts = (id) => fireSt.collection('posts').doc(id).delete();
+export const deletePosts = (id) => firebase.firestore().collection('posts').doc(id).delete();
 
 // Función para obtener el id
-export const getPost = (id) => fireSt.collection('posts').doc(id).get();
+export const getPost = (id) => firebase.firestore().collection('posts').doc(id).get();
 
 // Función para actualizar el post
-export const updatedPost = (id, updatedTask) => fireSt.collection('posts').doc(id).update(updatedTask);
+export const updatedPost = (id, updatedTask) => firebase.firestore().collection('posts').doc(id).update(updatedTask);
 
 // Función para dar like
 export const likePost = (idPost) => {
   const email = firebase.auth().currentUser.email;
-  return fireSt
+  return firebase.firestore()
     .collection('posts')
     .doc(idPost)
     .update({
@@ -97,7 +90,7 @@ export const likePost = (idPost) => {
 // Función para quitar el like
 export const unlikePost = (idPost) => {
   const email = firebase.auth().currentUser.email;
-  return fireSt
+  return firebase.firestore()
     .collection('posts')
     .doc(idPost)
     .update({
@@ -106,4 +99,4 @@ export const unlikePost = (idPost) => {
 };
 
 // Función para obtener los likes
-export const onGetLikes = (callback) => fireSt.collection('likes').onSnapshot(callback);
+export const onGetLikes = (callback) => firebase.firestore().collection('likes').onSnapshot(callback);

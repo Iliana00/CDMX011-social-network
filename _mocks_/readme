@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-expressions */
-const firestore = () => ({
+/* const firestore = () => ({
   collection: (nameCollection) => ({
    doc: () => {
       set: () => {
@@ -7,7 +7,7 @@ const firestore = () => ({
           resolve('el review ha sido agregado');
         })
       }
-   } 
+   }
   }),
 });
 const firebase = {
@@ -16,4 +16,4 @@ const firebase = {
 
 export default jest.fn(() => {
   firebase;
-});
+}); */
