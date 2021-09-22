@@ -1,5 +1,10 @@
+/* eslint-disable no-console */
 global.firebase = {
-  initializeApp: () => {},
-  auth: () => {},
-  signInWithEmailAndPassword: () => {},
+  initializeApp: () => console.log('hi firebase'),
+  firestore: () => console.log('hi firebase'),
+  auth: () => ({
+    signInWithEmailAndPassword: () => Promise.resolve(),
+    createUserWithEmailAndPassword: () => Promise.resolve(),
+    onAuthStateChanged: () => Promise.resolve(),
+  }),
 };

@@ -52,7 +52,7 @@ export const RendPosts = () => {
           </div>
           <div class='texticonspost'>
           <div class= 'iconDIV-like'>
-               <img class='icon-like btn-like' id='likeIcon${post.id}' data-id='${post.id}'  src='${likedByUser ? '../../img/heart.svg' : '../../img/corazon vacio.png'}'><span>${countLikes === 0 ? '' : countLikes}</span></img>
+               <img class='icon-like btn-like' id='likeIcon${post.id}' data-id='${post.id}'  src='${likedByUser ? '../../img/heart.svg' : '../../img/vacio.png'}'><span>${countLikes === 0 ? '' : countLikes}</span></img>
           </div>    
               <div class='delete-edit' id='user-buttons-${post.id}'>
               <img data-id='${post.id}' class='icon-post icon-delete' src='../img/icons8-borrar-para-siempre-50.png'>
@@ -92,7 +92,7 @@ export const RendPosts = () => {
               .then(() => {
                 // console.log(thisPost.likes);
               //  btn.classList.remove('btn-like--solid');
-                btn1.src = '../../img/corazon-vacio.png';
+                btn1.src = '../../img/vacio.png';
                 console.log('unlike');
               })
               .catch((error) => {
@@ -102,7 +102,7 @@ export const RendPosts = () => {
         });
       });
 
-      const btnDelete = document.querySelectorAll('.btn-delete');
+      const btnDelete = document.querySelectorAll('.icon-delete');
       btnDelete.forEach((btn) => {
         btn.addEventListener('click', async (e) => {
           swal('Are you sure to delete this post');
@@ -110,7 +110,7 @@ export const RendPosts = () => {
         });
       });
 
-      const btnEdit = document.querySelectorAll('.btn-edit');
+      const btnEdit = document.querySelectorAll('.icon-edit');
       btnEdit.forEach((btn) => {
         btn.addEventListener('click', async (e) => {
           const docs = await getPost(e.target.dataset.id);
