@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+/* eslint-disable no-alert */
 /* eslint-disable import/no-cycle */
 import { onNavigate } from '../router/router.js';
 import { signOut } from '../lib/firebase.js';
@@ -6,7 +8,7 @@ export const Navbar = () => {
   const template = `
     <nav>
     <div class="logo-nav">
-        <img class="logo-nav" src="../img/logo-nav2.png" alt="">
+        <img id="clickLogo" class="logo-nav" src="../img/logo-nav2.png" alt="">
     </div>
     </nav>
     <div class="menu-nav">
@@ -25,18 +27,18 @@ export const Navbar = () => {
     event.preventDefault();
     try {
       await signOut();
-      // console.log('SAli ehhh');
+      console.log('Salida exitosa');
       onNavigate('/');
     } catch (error) {
-      // alert(error);
+      alert(error);
     }
   });
-  // const profile = navBar.querySelector('#profilePerfil');
-  // profile.addEventListener('click', (e) => {
-  //     e.preventDefault();
 
-  //     onNavigate('/profile');
-  // });
+  const clickLogo = navBar.querySelector('#clickLogo');
+  clickLogo.addEventListener('click', (event) => {
+    event.preventDefault();
+    onNavigate('/home');
+  });
 
   return navBar;
 };

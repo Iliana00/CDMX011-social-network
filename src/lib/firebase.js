@@ -58,11 +58,7 @@ export const savePosts = (title, rating, review, user, date) => firebase.firesto
   likes: [],
 });
 
-// Función para mandar a llamar el contenido de savePosts
-
-// export const getPosts = (callback) => fireSt.collection('posts').get();
-
-// Función para llamar el contenido de los objetos ¿?
+// Función para que se actualicen los posts
 
 export const onGetPosts = (callback) => firebase.firestore().collection('posts').onSnapshot(callback);
 
@@ -99,4 +95,5 @@ export const unlikePost = (idPost) => {
 };
 
 // Función para obtener los likes
-export const onGetLikes = (callback) => firebase.firestore().collection('likes').onSnapshot(callback);
+// export const onGetLikes = (callback) =>
+// firebase.firestore().collection('likes').onSnapshot(callback);

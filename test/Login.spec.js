@@ -8,9 +8,10 @@ import { render } from '../src/utils.js';
 describe('Login', () => {
   document.body.innerHTML = '<div id="root"></div>';
   it('Should render', () => {
-    const rootDiv = document.getElementById('root');
-    const component = Login();
-    render(rootDiv, component);
+    const rootDiv = document.getElementById('root'); // hacer un appendchild del login
+    rootDiv.appendChild = Login();
+    // const component = Login();
+    // render(rootDiv, component); // llamar el root y agregar el login
     expect(rootDiv.innerHTML).toMatchSnapshot();
   });
   it('Should log in the user when the Login button is clicked', () => {
