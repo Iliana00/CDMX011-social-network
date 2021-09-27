@@ -23,11 +23,11 @@ describe('Login', () => {
     rootDiv.appendChild(component);
     expect(rootDiv.innerHTML).toMatchSnapshot();
   });
-  it('should Login user when the submit button is clicked', () => {
+  it('users should login when the submit button is clicked', () => {
     const mockLogin = jest.fn();
     mockLogin.mockImplementation(() => Promise.resolve());
 
-    firebase.auth = jest.fn().mockImplementation(() => ({
+    firebase.auth = mockLogin.mockImplementation(() => ({
       signInWithEmailAndPassword: mockLogin,
     }));
     const rootDiv = document.getElementById('root');

@@ -9,22 +9,22 @@ import { onNavigate } from '../router/router.js';
 // Initialize Firestore
 // const fireSt = firebase.firestore();
 
-// Metodo que me permite autenticar al  usuario con usuario y contraseña
+// Método que me permite autenticar al  usuario con usuario y contraseña
 export const register = (email, password) => firebase.auth()
   .createUserWithEmailAndPassword(email, password);
 
-// Metodo que me permite acceder a mi cuenta con usuario y contraseña
+// Método que me permite acceder a mi cuenta con usuario y contraseña
 export const login = (email, password) => firebase.auth()
   .signInWithEmailAndPassword(email, password);
 
-// Metodo para obtener al usuario que accedio
+// Método para obtener al usuario que accedió
 
 export const getUser = () => firebase.auth().currentUser;
 
-// Metodo para hacer que un usuario salga de la sesión
+// Método para hacer que un usuario salga de la sesión
 export const signOut = () => firebase.auth().signOut();
 
-// Metodo que indica si el usuario tiene la sesión activa
+// Método que indica si el usuario tiene la sesión activa
 
 export const activeSession = () => {
   firebase.auth().onAuthStateChanged((user) => {

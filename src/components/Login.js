@@ -35,7 +35,9 @@ export const Login = () => {
   loginContainer.innerHTML = view;
   const btnLogin = loginContainer.querySelector('#btnLogin');
   const btnSignUp = loginContainer.querySelector('#signup');
-  const withGoogle = loginContainer.querySelector('#withGoogle');
+  const withGoogle = loginContainer
+
+    .querySelector('#withGoogle');
   btnLogin.addEventListener('click', async (event) => {
     event.preventDefault();
     const email = loginContainer.querySelector('#loginEmail').value;
@@ -57,7 +59,6 @@ export const Login = () => {
     event.preventDefault();
     try {
       await loginGoogle();
-      // console.log('logueado con google');
       onNavigate('/home');
     } catch (error) {
       loginContainer.querySelector('#loginMessages').innerHTML = '&#x02716'.concat(' ', error.message);
